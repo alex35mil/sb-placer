@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SB Placer &trade;</title>
+
+  <link rel="stylesheet" href="css/sb-placer.css" />
+
+  <!--[if lt IE 9]>
+  <script src=”http://html5shiv.googlecode.com/svn/trunk/html5.js”></script>
+  <![endif]-->
+
+  <script>
+    var _sbjs = _sbjs || [];
+    _sbjs.push(['_setSessionLength', 15]);
+    _sbjs.push(['_setBaseHost', 'statica.alexfedoseev.com']);
+    _sbjs.push(['_setTimeZoneOffset', 4]);
+    _sbjs.push(['_setCampaignParam', 'custom_campaign']);
+    _sbjs.push(['_addOrganicSource', 'rambler.ru', 'query', 'rambler_in_da_house']);
+    _sbjs.push(['_addReferralSource', 'facebook.com', 'social']);
+    _sbjs.push(['_addReferralSource', 't.co', 'social', 'twitter.com']);
+    _sbjs.push(['_addReferralSource', 'plus.url.google.com', 'social', 'plus.google.com']);
+    _sbjs.push(['_setTypeinAttributes', '(direct)', '(none)']);
+  </script>
+  <script src="js/sourcebuster.min.js" id="sbjs"></script>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="js/sb-placer.min.js"></script>
+  <script src="js/settings.js"></script>
+
+</head>
+<body>
+
+  <section id='wrapper'>
+    <header>
+
+      <hgroup>
+        <h1>SB Placer</h1>
+      </hgroup>
+
+    </header>
+
+    <section id='src-links'>
+      <a href='#'>About</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href='#'>GitHub</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href='#'>Download from GitHub</a>
+    </section>
+
+    <section id='boxes'>
+      <div id="test-links">
+        Test links:&nbsp;&nbsp;
+        <a href='?utm_source=yandex&utm_medium=cpc&utm_campaign=y_celevye_poisk'>Yandex</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+        <a href='?utm_source=google&utm_medium=cpc&utm_campaign=g_celevye_poisk'>Google</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+        <a href='?utm_source=wtf&utm_medium=wtf&utm_campaign=wtf'>WTF</a>
+      </div>
+      <table>
+        <tr>
+          <td class="left-cell">
+            <div id="this-is-id-simple" class="box"></div>
+          </td>
+          <td class="right-cell">
+            <h4>Simple usage</h4>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-cell">
+            <div id="this-is-id-arrays" class="box"></div>
+          </td>
+          <td class="right-cell">
+            <h4>Match with Arrays</h4>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-cell">
+            <div id="this-is-id-regexp" class="box"></div>
+          </td>
+          <td class="right-cell">
+            <h4>This is RegExp</h4>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-cell">
+            <div class="this-is-class box"></div>
+            <div class="this-is-class box"></div>
+            <div class="this-is-class box"></div>
+          </td>
+          <td class="right-cell">
+            <h4>And all the classes!</h4>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+  </section>
+
+</body>
+</html>

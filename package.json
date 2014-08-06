@@ -1,0 +1,31 @@
+{
+  "name": "sb-placer",
+  "version": "0.0.1",
+  "description": "Change content of the page according given criteria (phones, titles etc.). You can use it with Sourcebuster JS (or stand-alone).",
+  "homepage": "https://github.com/alexfedoseev/sb-placer",
+  "author": {
+    "name": "Alex Fedoseev",
+    "email": "alex.fedoseev@gmail.com",
+    "url": "http://www.alexfedoseev.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexfedoseev/sb-placer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexfedoseev/sb-placer/issues"
+  },
+  "main": "js/sb-placer.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "jquery": "~2.1.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "^0.5.1"
+  }
+}
