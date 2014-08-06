@@ -40,12 +40,12 @@ $(function() {
     conditions: [
       {
         check: [source, medium, campaign],
-        when: [ ['yandex', 'begun'], 'cpc', /^y_cele.*ye_poisk$/i],
+        when: [ ['yandex', 'begun'], 'cpc', /^y_.*_poisk$/i],
         place: '<i>ya_beg_phone (regexp)</i>'
       },
       {
         check: [source, medium, campaign],
-        when: [ ['google', 'facebook'], 'cpc', /^g_cele.*ye_poisk$/i],
+        when: [ ['google', 'facebook'], 'cpc', /^g_.*_poisk$/i],
         place: '<i>g_fb_phone (regexp)</i>'
       }
     ]
