@@ -1,6 +1,6 @@
 /*
  * SB Placer
- * Version: 0.0.1
+ * Version: 0.0.2
  * https://github.com/alexfedoseev/sb-placer
  *
  * Copyright (c) Alex Fedoseev (http://www.alexfedoseev.com)
@@ -37,8 +37,10 @@ $.fn.sb_placer = function(settings) {
     if (rules[i].check instanceof Array && rules[i].when instanceof Array && rules[i].check.length === rules[i].when.length) {
       var place_it = false;
       for (var i1 = 0; i1 < rules[i].check.length; i1++) {
-        if ( (rules[i].when[i1] instanceof RegExp && rules[i].check[i1].match(rules[i].when[i1])) ||
-             (!(rules[i].when[i1] instanceof RegExp) && rules[i].when[i1].indexOf(rules[i].check[i1]) !== -1) ) {
+        if (  (rules[i].when[i1] instanceof RegExp && rules[i].check[i1].match(rules[i].when[i1])) ||
+              (!(rules[i].when[i1] instanceof RegExp) && rules[i].when[i1] instanceof Array && rules[i].when[i1].indexOf(rules[i].check[i1]) !== -1) ||
+              (!(rules[i].when[i1] instanceof RegExp) && !(rules[i].when[i1] instanceof Array) && rules[i].when[i1] === rules[i].check[i1])
+           ) {
           place_it = true;
         } else {
           place_it = false;
@@ -53,8 +55,10 @@ $.fn.sb_placer = function(settings) {
 
 
     // Single attribute check
-    if ( (rules[i].when instanceof RegExp && rules[i].check.match(rules[i].when)) ||
-         (!(rules[i].when instanceof RegExp) && rules[i].when.indexOf(rules[i].check) !== -1) ) {
+    if (  (rules[i].when instanceof RegExp && rules[i].check.match(rules[i].when)) ||
+          (!(rules[i].when instanceof RegExp) && rules[i].when instanceof Array && rules[i].when.indexOf(rules[i].check) !== -1) ||
+          (!(rules[i].when instanceof RegExp) && !(rules[i].when instanceof Array) && rules[i].when === rules[i].check)
+       ) {
       place_value(target, rules[i].place);
       return true;
     }

@@ -8,6 +8,16 @@ $(function() {
     conditions: [
       {
         check: source,
+        when: 'yand',
+        place: '<i>ya_phone (simple) - WRONG 1</i>'
+      },
+      {
+        check: source,
+        when: 'yandexxx',
+        place: '<i>ya_phone (simple) - WRONG 2</i>'
+      },
+      {
+        check: source,
         when: 'yandex',
         place: '<i>ya_phone (simple)</i>'
       },
@@ -22,6 +32,26 @@ $(function() {
   $('#this-is-id-arrays').sb_placer({
     default_value: 'default phone (arrays)',
     conditions: [
+      {
+        check: [source, medium, campaign],
+        when: [ ['yand', 'begun'], 'cpc', [1, 2, 'y_celevye_poisk'] ],
+        place: '<i>ya_beg_phone (arrays) - WRONG 1</i>'
+      },
+      {
+        check: [source, medium, campaign],
+        when: [ ['yandexxx', 'begun'], 'cpc', [1, 2, 'y_celevye_poisk'] ],
+        place: '<i>ya_beg_phone (arrays) - WRONG 2</i>'
+      },
+      {
+        check: [source, medium, campaign],
+        when: [ ['yandex', 'begun'], 'cp', [1, 2, 'y_celevye_poisk'] ],
+        place: '<i>ya_beg_phone (arrays) - WRONG 3</i>'
+      },
+      {
+        check: [source, medium, campaign],
+        when: [ ['yandex', 'begun'], 'cpccc', [1, 2, 'y_celevye_poisk'] ],
+        place: '<i>ya_beg_phone (arrays) - WRONG 4</i>'
+      },
       {
         check: [source, medium, campaign],
         when: [ ['yandex', 'begun'], 'cpc', [1, 2, 'y_celevye_poisk'] ],
