@@ -3,6 +3,10 @@ $(function() {
       medium = get_sbjs.current.mdm,
       campaign = get_sbjs.current.cmp;
 
+  function call_me_back(value) {
+    console.log(value);
+  }
+
   $('#this-is-id-simple').sb_placer({
     default_value: 'default phone (simple)',
     conditions: [
@@ -26,7 +30,8 @@ $(function() {
         when: 'google',
         place: '<i>g_phone (simple)</i>'
       }
-    ]
+    ],
+    callback: call_me_back
   });
 
   $('#this-is-id-arrays').sb_placer({
@@ -62,7 +67,8 @@ $(function() {
         when: [ ['google', 'facebook'], 'cpc', [3, 'sMtH', 'g_celevye_poisk'] ],
         place: '<i>g_fb_phone (arrays)</i>'
       }
-    ]
+    ],
+    callback: call_me_back
   });
 
   $('#this-is-id-regexp').sb_placer({

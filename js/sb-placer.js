@@ -23,6 +23,12 @@ $.fn.sb_placer = function(settings) {
     });
   }
 
+  function exec_callback(value) {
+    if (settings.callback && settings.callback instanceof Function) {
+      return settings.callback(value);
+    }
+  }
+
   for (var i = 0; i < rules.length; i++) {
 
     // Multiple attributes check
@@ -49,6 +55,7 @@ $.fn.sb_placer = function(settings) {
       }
       if (place_it === true) {
         place_value(target, rules[i].place);
+        exec_callback(rules[i].place);
         return true;
       }
     }
@@ -60,6 +67,7 @@ $.fn.sb_placer = function(settings) {
           (!(rules[i].when instanceof RegExp) && !(rules[i].when instanceof Array) && rules[i].when === rules[i].check)
        ) {
       place_value(target, rules[i].place);
+      exec_callback(rules[i].place);
       return true;
     }
 
@@ -67,6 +75,7 @@ $.fn.sb_placer = function(settings) {
 
   // We have to place something
   place_value(target, settings.default_value);
+  exec_callback(settings.default_value);
   return true;
 
 };
