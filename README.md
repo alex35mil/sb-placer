@@ -1,3 +1,3 @@
 # SB Placer
 
-Coming soon!
+Docs in progress.

@@ -1,6 +1,6 @@
 /*
  * SB Placer
- * Version: 0.0.2
+ * Version: 0.0.3
  * https://github.com/alexfedoseev/sb-placer
  *
  * Copyright (c) Alex Fedoseev (http://www.alexfedoseev.com)
@@ -23,9 +23,9 @@ $.fn.sb_placer = function(settings) {
     });
   }
 
-  function exec_callback(value) {
+  function exec_callback(check, when, place) {
     if (settings.callback && settings.callback instanceof Function) {
-      return settings.callback(value);
+      return settings.callback(check, when, place);
     }
   }
 
@@ -55,7 +55,7 @@ $.fn.sb_placer = function(settings) {
       }
       if (place_it === true) {
         place_value(target, rules[i].place);
-        exec_callback(rules[i].place);
+        exec_callback(rules[i].check, rules[i].when, rules[i].place);
         return true;
       }
     }
@@ -67,7 +67,7 @@ $.fn.sb_placer = function(settings) {
           (!(rules[i].when instanceof RegExp) && !(rules[i].when instanceof Array) && rules[i].when === rules[i].check)
        ) {
       place_value(target, rules[i].place);
-      exec_callback(rules[i].place);
+      exec_callback(rules[i].check, rules[i].when, rules[i].place);
       return true;
     }
 
@@ -75,7 +75,7 @@ $.fn.sb_placer = function(settings) {
 
   // We have to place something
   place_value(target, settings.default_value);
-  exec_callback(settings.default_value);
+  exec_callback(false, false, settings.default_value);
   return true;
 
 };

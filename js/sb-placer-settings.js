@@ -3,8 +3,10 @@ $(function() {
       medium = get_sbjs.current.mdm,
       campaign = get_sbjs.current.cmp;
 
-  function call_me_back(value) {
-    console.log(value);
+  function call_me_back(check, when, place) {
+    console.log('Check value: ' + JSON.stringify(check) + ' (' + check.constructor.name + ')');
+    console.log('When value: ' + JSON.stringify(when) + ' (' + when.constructor.name + ')');
+    console.log('Place value: ' + JSON.stringify(place) + ' (' + place.constructor.name + ')');
   }
 
   $('#this-is-id-simple').sb_placer({
@@ -30,8 +32,7 @@ $(function() {
         when: 'google',
         place: '<i>g_phone (simple)</i>'
       }
-    ],
-    callback: call_me_back
+    ]
   });
 
   $('#this-is-id-arrays').sb_placer({

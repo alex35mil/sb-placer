@@ -1,6 +1,6 @@
 {
   "name": "sb-placer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Change content of the page according given criteria (phones, titles etc.). You can use it with Sourcebuster JS (or stand-alone).",
   "homepage": "https://github.com/alexfedoseev/sb-placer",
   "author": {
