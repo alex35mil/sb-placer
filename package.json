@@ -1,7 +1,7 @@
 {
   "name": "sb-placer",
-  "version": "0.0.3",
-  "description": "Change content of the page according given criteria (phones, titles etc.). You can use it with Sourcebuster JS (or stand-alone).",
+  "version": "1.0.0",
+  "description": "Change content of the page according given criteria.",
   "homepage": "https://github.com/alexfedoseev/sb-placer",
   "author": {
     "name": "Alex Fedoseev",
@@ -16,16 +16,60 @@
   "bugs": {
     "url": "https://github.com/alexfedoseev/sb-placer/issues"
   },
-  "main": "js/sb-placer.min.js",
+  "main": "sb-placer.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=development http-server -a js.dev -p 8080 & gulp",
+    "build": "NODE_ENV=production gulp build"
   },
-  "dependencies": {
-    "jquery": "~2.1.1"
+  "lintOptions": {
+    "globals": {
+      "define": false
+    },
+    "exported": {
+      "sbPlacer": true
+    },
+    "jquery": true,
+    "node": true,
+    "bitwise": true,
+    "browser": true,
+    "curly": false,
+    "eqeqeq": true,
+    "forin": true,
+    "immed": true,
+    "indent": 2,
+    "latedef": "nofunc",
+    "newcap": true,
+    "noarg": true,
+    "noempty": true,
+    "nonbsp": true,
+    "nonew": true,
+    "nonstandard": true,
+    "strict": false,
+    "globalstrict": true,
+    "sub": true,
+    "supernew": true,
+    "undef": true,
+    "unused": true
   },
+  "dependencies": {},
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-uglify": "^0.5.1"
+    "del": "^1.1.1",
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^2.0.0",
+    "gulp-changed": "^1.1.0",
+    "gulp-header": "^1.2.2",
+    "gulp-if": "^1.2.5",
+    "gulp-include": "^1.1.0",
+    "gulp-jshint": "^1.9.0",
+    "gulp-minify-css": "^0.3.11",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^1.2.4",
+    "gulp-slim": "0.0.13",
+    "gulp-uglify": "^1.0.2",
+    "gulp-util": "^3.0.1",
+    "map-stream": "0.0.5",
+    "node-notifier": "^4.0.3",
+    "require-dir": "^0.1.0",
+    "vinyl-buffer": "^1.0.0"
   }
 }

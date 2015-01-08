@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>SB-Placer &trade;</title><!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="css/sb-placer.min.css" rel="stylesheet" />
+    <script src="http://rawgit.com/alexfedoseev/sourcebuster-js/v1.0.5/dist/sourcebuster.min.js"></script>
+    <script type="text/javascript">
+      sbjs.init({
+        lifetime: 3,
+        domain: {
+          host: 'statica.alexfedoseev.com',
+          isolate: true
+        }
+      });
+    </script>
+    <script src="js/sb-placer.min.js?v=1.0.0"></script>
+  </head>
+  <body>
+    <section id="wrapper">
+      <header>
+        <h1>
+          SB-Placer
+        </h1>
+      </header>
+      <section id="src-links">
+        <a href="http://www.alexfedoseev.com/post/44/sb-placer">About</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="https://github.com/alexfedoseev/sb-placer">GitHub</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="https://github.com/alexfedoseev/sb-placer/archive/master.zip">Download from GitHub</a>
+      </section>
+      <section id="boxes">
+        <div id="test-links">
+          Test links: &nbsp;&nbsp;<a href="?utm_source=yandex&amp;utm_medium=cpc&amp;utm_campaign=y_celevye_poisk">Yandex</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=g_celevye_poisk">Google</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="?utm_source=wtf&amp;utm_medium=wtf&amp;utm_campaign=wtf">WTF</a>
+        </div>
+        <table>
+          <tr>
+            <td class="left-cell">
+              <div class="box" id="this-is-id-simple"></div>
+            </td>
+            <td class="right-cell">
+              <h4>
+                Simple usage
+              </h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="left-cell">
+              <div class="box" id="this-is-id-arrays"></div>
+            </td>
+            <td class="right-cell">
+              <h4>
+                Match with Arrays
+              </h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="left-cell">
+              <div class="box" id="this-is-id-regexp"></div>
+            </td>
+            <td class="right-cell">
+              <h4>
+                This is RegExp
+              </h4>
+            </td>
+          </tr>
+          <tr>
+            <td class="left-cell">
+              <div class="this-is-class box"></div>
+              <div class="this-is-class box"></div>
+              <div class="this-is-class box"></div>
+            </td>
+            <td class="right-cell">
+              <h4>
+                And all the classes!
+              </h4>
+            </td>
+          </tr>
+        </table>
+      </section>
+      <script type="text/javascript">
+        var source   = sbjs.get.current.src,
+            medium   = sbjs.get.current.mdm,
+            campaign = sbjs.get.current.cmp;
+        
+        function call_me_back(check, when, place) {
+          try {
+            console.log('Check value: ' + JSON.stringify(check) + ' (' + check.constructor.name + ')');
+            console.log('When value: ' + JSON.stringify(when) + ' (' + when.constructor.name + ')');
+            console.log('Place value: ' + JSON.stringify(place) + ' (' + place.constructor.name + ')');
+          } catch (err) {
+            console.log('Oops!');
+          }
+        }
+        
+        sbPlacer({
+          targets: '#this-is-id-simple',
+          default_value: 'default phone (simple)',
+          conditions: [
+            {
+              check: source,
+              when: 'yand',
+              place: '<i>ya_phone (simple) - WRONG 1</i>'
+            },
+            {
+              check: source,
+              when: 'yandexxx',
+              place: '<i>ya_phone (simple) - WRONG 2</i>'
+            },
+            {
+              check: source,
+              when: 'yandex',
+              place: '<i>ya_phone (simple)</i>'
+            },
+            {
+              check: source,
+              when: 'google',
+              place: '<i>g_phone (simple)</i>'
+            }
+          ]
+        });
+        
+        sbPlacer({
+          targets: '#this-is-id-arrays',
+          default_value: 'default phone (arrays)',
+          conditions: [
+            {
+              check: [source, medium, campaign],
+              when: [['yand', 'begun'], 'cpc', [1, 2, 'y_celevye_poisk']],
+              place: '<i>ya_beg_phone (arrays) - WRONG 1</i>'
+            },
+            {
+              check: [source, medium, campaign],
+              when: [['yandexxx', 'begun'], 'cpc', [1, 2, 'y_celevye_poisk']],
+              place: '<i>ya_beg_phone (arrays) - WRONG 2</i>'
+            },
+            {
+              check: [source, medium, campaign],
+              when: [['yandex', 'begun'], 'cp', [1, 2, 'y_celevye_poisk']],
+              place: '<i>ya_beg_phone (arrays) - WRONG 3</i>'
+            },
+            {
+              check: [source, medium, campaign],
+              when: [['yandex', 'begun'], 'cpccc', [1, 2, 'y_celevye_poisk']],
+              place: '<i>ya_beg_phone (arrays) - WRONG 4</i>'
+            },
+            {
+              check: [source, medium, campaign],
+              when: [['yandex', 'begun'], 'cpc', [1, 2, 'y_celevye_poisk']],
+              place: '<i>ya_beg_phone (arrays)</i>'
+            },
+            {
+              check: [source, medium, campaign],
+              when: [['google', 'facebook'], 'cpc', [3, 'sMtH', 'g_celevye_poisk']],
+              place: '<i>g_fb_phone (arrays)</i>'
+            }
+          ],
+          callback: call_me_back
+        });
+        
+        sbPlacer({
+          targets: '#this-is-id-regexp',
+          default_value: 'default phone (regexp)',
+          conditions: [
+            {
+              check: [source, medium, campaign],
+              when: [['yandex', 'begun'], 'cpc', /^y_.*_poisk$/i],
+              place: '<i>ya_beg_phone (regexp)</i>'
+            },
+            {
+              check: [source, medium, campaign],
+              when: [['google', 'facebook'], 'cpc', /^g_.*_poisk$/i],
+              place: '<i>g_fb_phone (regexp)</i>'
+            }
+          ]
+        });
+        
+        sbPlacer({
+          targets: '.this-is-class',
+          default_value: 'default phone (all classes)',
+          conditions: [
+            {
+              check: source,
+              when: 'yandex',
+              place: '<i>ya_phone (all classes)</i>'
+            },
+            {
+              check: source,
+              when: 'google',
+              place: '<i>g_phone (all classes)</i>'
+            }
+          ]
+        });
+      </script>
+    </section>
+  </body>
+</html>

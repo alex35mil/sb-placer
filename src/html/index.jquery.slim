@@ -1,0 +1,185 @@
+doctype html
+html
+  head
+    meta [charset="utf-8"]
+    title SB-Placer (jQuery) &trade;
+
+    /[if lt IE 9]
+      script [src="http://html5shiv.googlecode.com/svn/trunk/html5.js"]
+
+    link [rel="stylesheet" href="css/sb-placer.min.css"]
+
+    script [src="http://rawgit.com/alexfedoseev/sourcebuster-js/v1.0.5/dist/sourcebuster.min.js"]
+    javascript:
+      sbjs.init({
+        lifetime: 3,
+        domain: {
+          host: 'statica.alexfedoseev.com',
+          isolate: true
+        }
+      });
+
+    script [src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"]
+    script [src="js/sb-placer.jquery.min.js?v=1.0.0"]
+
+  body
+
+    section [id="wrapper"]
+      header
+        h1 SB-Placer
+
+
+      section [id="src-links"]
+        a [href="http://www.alexfedoseev.com/post/44/sb-placer"] About
+        | &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+        a [href="https://github.com/alexfedoseev/sb-placer"] GitHub
+        | &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+        a [href="https://github.com/alexfedoseev/sb-placer/archive/master.zip"] Download from GitHub
+
+      section [id="boxes"]
+        div [id="test-links"]
+          | Test links: &nbsp;&nbsp;
+          a [href="?utm_source=yandex&utm_medium=cpc&utm_campaign=y_celevye_poisk"] Yandex
+          | &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+          a [href="?utm_source=google&utm_medium=cpc&utm_campaign=g_celevye_poisk"] Google
+          | &nbsp;&nbsp;&middot;&nbsp;&nbsp;
+          a [href="?utm_source=wtf&utm_medium=wtf&utm_campaign=wtf"] WTF
+
+        table
+          tr
+            td [class="left-cell"]
+              div [id="this-is-id-simple" class="box"]
+            td [class="right-cell"]
+              h4 Simple usage
+
+          tr
+            td [class="left-cell"]
+              div [id="this-is-id-arrays" class="box"]
+            td [class="right-cell"]
+              h4 Match with Arrays
+
+          tr
+            td [class="left-cell"]
+              div [id="this-is-id-regexp" class="box"]
+            td [class="right-cell"]
+              h4 This is RegExp
+
+          tr
+            td [class="left-cell"]
+              div [class="this-is-class box"]
+              div [class="this-is-class box"]
+              div [class="this-is-class box"]
+            td [class="right-cell"]
+              h4 And all the classes!
+
+      javascript:
+        $(function () {
+          var source   = sbjs.get.current.src,
+              medium   = sbjs.get.current.mdm,
+              campaign = sbjs.get.current.cmp;
+
+          function call_me_back(check, when, place) {
+            try {
+              console.log('Check value: ' + JSON.stringify(check) + ' (' + check.constructor.name + ')');
+              console.log('When value: ' + JSON.stringify(when) + ' (' + when.constructor.name + ')');
+              console.log('Place value: ' + JSON.stringify(place) + ' (' + place.constructor.name + ')');
+            } catch (err) {
+              console.log('Oops!');
+            }
+          }
+
+          $('#this-is-id-simple').sbPlacer({
+            default_value: 'default phone (simple)',
+            conditions: [
+              {
+                check: source,
+                when: 'yand',
+                place: '<i>ya_phone (simple) - WRONG 1</i>'
+              },
+              {
+                check: source,
+                when: 'yandexxx',
+                place: '<i>ya_phone (simple) - WRONG 2</i>'
+              },
+              {
+                check: source,
+                when: 'yandex',
+                place: '<i>ya_phone (simple)</i>'
+              },
+              {
+                check: source,
+                when: 'google',
+                place: '<i>g_phone (simple)</i>'
+              }
+            ]
+          });
+
+          $('#this-is-id-arrays').sbPlacer({
+            default_value: 'default phone (arrays)',
+            conditions: [
+              {
+                check: [source, medium, campaign],
+                when: [['yand', 'begun'], 'cpc', [1, 2, 'y_celevye_poisk']],
+                place: '<i>ya_beg_phone (arrays) - WRONG 1</i>'
+              },
+              {
+                check: [source, medium, campaign],
+                when: [['yandexxx', 'begun'], 'cpc', [1, 2, 'y_celevye_poisk']],
+                place: '<i>ya_beg_phone (arrays) - WRONG 2</i>'
+              },
+              {
+                check: [source, medium, campaign],
+                when: [['yandex', 'begun'], 'cp', [1, 2, 'y_celevye_poisk']],
+                place: '<i>ya_beg_phone (arrays) - WRONG 3</i>'
+              },
+              {
+                check: [source, medium, campaign],
+                when: [['yandex', 'begun'], 'cpccc', [1, 2, 'y_celevye_poisk']],
+                place: '<i>ya_beg_phone (arrays) - WRONG 4</i>'
+              },
+              {
+                check: [source, medium, campaign],
+                when: [['yandex', 'begun'], 'cpc', [1, 2, 'y_celevye_poisk']],
+                place: '<i>ya_beg_phone (arrays)</i>'
+              },
+              {
+                check: [source, medium, campaign],
+                when: [['google', 'facebook'], 'cpc', [3, 'sMtH', 'g_celevye_poisk']],
+                place: '<i>g_fb_phone (arrays)</i>'
+              }
+            ],
+            callback: call_me_back
+          });
+
+          $('#this-is-id-regexp').sbPlacer({
+            default_value: 'default phone (regexp)',
+            conditions: [
+              {
+                check: [source, medium, campaign],
+                when: [['yandex', 'begun'], 'cpc', /^y_.*_poisk$/i],
+                place: '<i>ya_beg_phone (regexp)</i>'
+              },
+              {
+                check: [source, medium, campaign],
+                when: [['google', 'facebook'], 'cpc', /^g_.*_poisk$/i],
+                place: '<i>g_fb_phone (regexp)</i>'
+              }
+            ]
+          });
+
+          $('.this-is-class').sbPlacer({
+            default_value: 'default phone (all classes)',
+            conditions: [
+              {
+                check: source,
+                when: 'yandex',
+                place: '<i>ya_phone (all classes)</i>'
+              },
+              {
+                check: source,
+                when: 'google',
+                place: '<i>g_phone (all classes)</i>'
+              }
+            ]
+          });
+        });
