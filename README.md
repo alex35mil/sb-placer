@@ -193,8 +193,6 @@ $('.sb-phone').sbPlacer({
 });
 ```
 
-You've got the point.
-
 ### Callback
 
 You can exec callback right after the placement was done (it's optional). It takes 3 arguments: `check`, `when` & `place` — values from matched object.
@@ -215,7 +213,7 @@ $('.sb-phone').sbPlacer({
   /* settings */
   callback: doSmth
 });
-
+```
 
 ## P.S.
 
